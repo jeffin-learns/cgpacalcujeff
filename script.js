@@ -1,5 +1,3 @@
-// script.js (Updated with verified 4th semester subjects from AU R2021 via Stucor)
-
 const subjectData = {
   CSE: [
     { name: "Probability and Statistics", credit: 4 },
@@ -9,7 +7,7 @@ const subjectData = {
     { name: "Software Engineering", credit: 3 },
     { name: "Operating Systems Laboratory", credit: 2 },
     { name: "Database Management Systems Laboratory", credit: 2 },
-    { name: "Advanced Reading and Writing", credit: 1 },
+    { name: "Advanced Reading and Writing", credit: 1 }
   ],
   IT: [
     { name: "Discrete Mathematics and Graph Theory", credit: 4 },
@@ -19,7 +17,7 @@ const subjectData = {
     { name: "Software Engineering", credit: 3 },
     { name: "Operating Systems Laboratory", credit: 2 },
     { name: "Database Management Systems Laboratory", credit: 2 },
-    { name: "Advanced Reading and Writing", credit: 1 },
+    { name: "Advanced Reading and Writing", credit: 1 }
   ],
   ECE: [
     { name: "Probability and Random Processes", credit: 4 },
@@ -29,7 +27,7 @@ const subjectData = {
     { name: "Control Systems Engineering", credit: 3 },
     { name: "Electronic Circuits Laboratory", credit: 2 },
     { name: "Linear Integrated Circuits Laboratory", credit: 2 },
-    { name: "Professional Communication", credit: 1 },
+    { name: "Professional Communication", credit: 1 }
   ],
   EEE: [
     { name: "Electrical Machines II", credit: 4 },
@@ -39,7 +37,7 @@ const subjectData = {
     { name: "Control Systems", credit: 3 },
     { name: "Power Electronics Laboratory", credit: 2 },
     { name: "Control Systems Laboratory", credit: 2 },
-    { name: "Advanced Reading and Writing", credit: 1 },
+    { name: "Advanced Reading and Writing", credit: 1 }
   ],
   MECH: [
     { name: "Engineering Metallurgy", credit: 3 },
@@ -49,7 +47,7 @@ const subjectData = {
     { name: "Manufacturing Technology II", credit: 3 },
     { name: "Metrology and Measurements Laboratory", credit: 2 },
     { name: "Manufacturing Technology Laboratory II", credit: 2 },
-    { name: "Professional Communication", credit: 1 },
+    { name: "Professional Communication", credit: 1 }
   ],
   CIVIL: [
     { name: "Construction Materials", credit: 3 },
@@ -59,7 +57,7 @@ const subjectData = {
     { name: "Environmental Engineering I", credit: 3 },
     { name: "Surveying Laboratory", credit: 2 },
     { name: "Strength of Materials Laboratory", credit: 2 },
-    { name: "Advanced Reading and Writing", credit: 1 },
+    { name: "Advanced Reading and Writing", credit: 1 }
   ],
   "AI&DS": [
     { name: "Probability and Statistics", credit: 4 },
@@ -69,7 +67,7 @@ const subjectData = {
     { name: "Software Engineering", credit: 3 },
     { name: "Mini Project", credit: 2 },
     { name: "Design and Analysis of Algorithms Laboratory", credit: 2 },
-    { name: "Professional English", credit: 1 },
+    { name: "Professional English", credit: 1 }
   ],
   CSBS: [
     { name: "Discrete Mathematics and Graph Theory", credit: 4 },
@@ -79,7 +77,7 @@ const subjectData = {
     { name: "Software Engineering", credit: 3 },
     { name: "Operating Systems Laboratory", credit: 2 },
     { name: "DAA Laboratory", credit: 2 },
-    { name: "Advanced Reading and Writing", credit: 1 },
+    { name: "Advanced Reading and Writing", credit: 1 }
   ]
 };
 
@@ -112,18 +110,32 @@ function loadSubjects() {
 function calculateCGPA() {
   const branch = document.getElementById("branch").value;
   const resultBox = document.getElementById("result");
-  if (!branch || !subjectData[branch]) return;
+  
+  if (!branch || !subjectData[branch]) {
+    resultBox.innerText = "Please select a valid department first";
+    resultBox.style.display = "block";
+    return;
+  }
 
   let totalCredits = 0;
   let totalPoints = 0;
 
   subjectData[branch].forEach((subject, index) => {
-    const grade = parseInt(document.getElementById(`grade${index}`).value);
+    const gradeSelect = document.getElementById(`grade${index}`);
+    if (!gradeSelect) return;
+    
+    const grade = parseInt(gradeSelect.value);
     totalCredits += subject.credit;
     totalPoints += grade * subject.credit;
   });
 
+  if (totalCredits === 0) {
+    resultBox.innerText = "Please select grades for all subjects";
+    resultBox.style.display = "block";
+    return;
+  }
+
   const cgpa = (totalPoints / totalCredits).toFixed(2);
-  resultBox.innerText = `Your CGPA for 4th Semester is: ${cgpa}`;
+  resultBox.innerHTML = `<h3>Your CGPA for 4th Semester is: ${cgpa}</h3>`;
   resultBox.style.display = "block";
 }

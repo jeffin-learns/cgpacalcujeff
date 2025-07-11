@@ -1,82 +1,129 @@
+// script.js (Updated with verified 4th semester subjects from AU R2021 via Stucor)
+
 const subjectData = {
   CSE: [
-    { code: "MA3451", name: "Discrete Mathematics", credits: 4 },
-    { code: "CS3401", name: "Operating Systems", credits: 3 },
-    { code: "CS3402", name: "Design and Analysis of Algorithms", credits: 3 },
-    { code: "CS3451", name: "Computer Organization and Architecture", credits: 3 },
-    { code: "GE3451", name: "Environmental Science", credits: 2 },
-    { code: "CS3481", name: "OS Lab", credits: 1.5 },
-    { code: "CS3482", name: "Advanced Programming Lab", credits: 1.5 },
+    { name: "Probability and Statistics", credit: 4 },
+    { name: "Operating Systems", credit: 3 },
+    { name: "Database Management Systems", credit: 3 },
+    { name: "Design and Analysis of Algorithms", credit: 4 },
+    { name: "Software Engineering", credit: 3 },
+    { name: "Operating Systems Laboratory", credit: 2 },
+    { name: "Database Management Systems Laboratory", credit: 2 },
+    { name: "Advanced Reading and Writing", credit: 1 },
+  ],
+  IT: [
+    { name: "Discrete Mathematics and Graph Theory", credit: 4 },
+    { name: "Operating Systems", credit: 3 },
+    { name: "Database Management Systems", credit: 3 },
+    { name: "Computer Networks", credit: 3 },
+    { name: "Software Engineering", credit: 3 },
+    { name: "Operating Systems Laboratory", credit: 2 },
+    { name: "Database Management Systems Laboratory", credit: 2 },
+    { name: "Advanced Reading and Writing", credit: 1 },
   ],
   ECE: [
-    { code: "MA3451", name: "Discrete Mathematics", credits: 4 },
-    { code: "EC3401", name: "Communication Theory", credits: 3 },
-    { code: "EC3402", name: "Electronic Circuits", credits: 3 },
-    { code: "EC3451", name: "EM Fields", credits: 3 },
-    { code: "GE3451", name: "Environmental Science", credits: 2 },
-    { code: "EC3481", name: "Electronic Circuits Lab", credits: 1.5 },
-    { code: "EC3482", name: "Communication Lab", credits: 1.5 },
+    { name: "Probability and Random Processes", credit: 4 },
+    { name: "Electronic Circuits II", credit: 3 },
+    { name: "Communication Theory", credit: 4 },
+    { name: "Linear Integrated Circuits", credit: 3 },
+    { name: "Control Systems Engineering", credit: 3 },
+    { name: "Electronic Circuits Laboratory", credit: 2 },
+    { name: "Linear Integrated Circuits Laboratory", credit: 2 },
+    { name: "Professional Communication", credit: 1 },
   ],
-  // ... Add all other branches (EEE, MECH, CIVIL, AI&DS, CSBS, IT) similarly
-};
-
-const gradeMap = {
-  "O": 10,
-  "A+": 9,
-  "A": 8,
-  "B+": 7,
-  "B": 6,
-  "RA": 0,
-  "SA": 0,
-  "W": 0
+  EEE: [
+    { name: "Electrical Machines II", credit: 4 },
+    { name: "Transmission and Distribution", credit: 3 },
+    { name: "Power Electronics", credit: 3 },
+    { name: "Measurements and Instrumentation", credit: 3 },
+    { name: "Control Systems", credit: 3 },
+    { name: "Power Electronics Laboratory", credit: 2 },
+    { name: "Control Systems Laboratory", credit: 2 },
+    { name: "Advanced Reading and Writing", credit: 1 },
+  ],
+  MECH: [
+    { name: "Engineering Metallurgy", credit: 3 },
+    { name: "Kinematics of Machinery", credit: 4 },
+    { name: "Thermal Engineering I", credit: 4 },
+    { name: "Metrology and Measurements", credit: 3 },
+    { name: "Manufacturing Technology II", credit: 3 },
+    { name: "Metrology and Measurements Laboratory", credit: 2 },
+    { name: "Manufacturing Technology Laboratory II", credit: 2 },
+    { name: "Professional Communication", credit: 1 },
+  ],
+  CIVIL: [
+    { name: "Construction Materials", credit: 3 },
+    { name: "Strength of Materials II", credit: 4 },
+    { name: "Fluid Mechanics", credit: 4 },
+    { name: "Surveying", credit: 3 },
+    { name: "Environmental Engineering I", credit: 3 },
+    { name: "Surveying Laboratory", credit: 2 },
+    { name: "Strength of Materials Laboratory", credit: 2 },
+    { name: "Advanced Reading and Writing", credit: 1 },
+  ],
+  "AI&DS": [
+    { name: "Probability and Statistics", credit: 4 },
+    { name: "Data Warehousing and Data Mining", credit: 3 },
+    { name: "Design and Analysis of Algorithms", credit: 4 },
+    { name: "Computer Networks", credit: 3 },
+    { name: "Software Engineering", credit: 3 },
+    { name: "Mini Project", credit: 2 },
+    { name: "Design and Analysis of Algorithms Laboratory", credit: 2 },
+    { name: "Professional English", credit: 1 },
+  ],
+  CSBS: [
+    { name: "Discrete Mathematics and Graph Theory", credit: 4 },
+    { name: "Design and Analysis of Algorithms", credit: 4 },
+    { name: "Computer Networks", credit: 3 },
+    { name: "Operating Systems", credit: 3 },
+    { name: "Software Engineering", credit: 3 },
+    { name: "Operating Systems Laboratory", credit: 2 },
+    { name: "DAA Laboratory", credit: 2 },
+    { name: "Advanced Reading and Writing", credit: 1 },
+  ]
 };
 
 function loadSubjects() {
   const branch = document.getElementById("branch").value;
   const form = document.getElementById("subject-form");
-  form.innerHTML = ""; // Clear previous
+  form.innerHTML = "";
 
-  if (!subjectData[branch]) return;
+  if (!branch || !subjectData[branch]) return;
 
-  subjectData[branch].forEach((sub, index) => {
-    const label = document.createElement("label");
-    label.innerText = `${sub.name} (${sub.credits} credits)`;
-
-    const select = document.createElement("select");
-    select.name = `grade${index}`;
-    select.dataset.credits = sub.credits;
-
-    Object.keys(gradeMap).forEach(grade => {
-      const option = document.createElement("option");
-      option.value = grade;
-      option.text = grade;
-      select.appendChild(option);
-    });
-
-    form.appendChild(label);
-    form.appendChild(select);
+  subjectData[branch].forEach((subject, index) => {
+    const div = document.createElement("div");
+    div.className = "form-group";
+    div.innerHTML = `
+      <label>${subject.name} (Credit: ${subject.credit})</label>
+      <select id="grade${index}">
+        <option value="10">O</option>
+        <option value="9">A+</option>
+        <option value="8">A</option>
+        <option value="7">B+</option>
+        <option value="6">B</option>
+        <option value="5">C</option>
+        <option value="0">RA</option>
+      </select>
+    `;
+    form.appendChild(div);
   });
 }
 
 function calculateCGPA() {
-  const form = document.getElementById("subject-form");
-  const selects = form.querySelectorAll("select");
+  const branch = document.getElementById("branch").value;
+  const resultBox = document.getElementById("result");
+  if (!branch || !subjectData[branch]) return;
 
   let totalCredits = 0;
   let totalPoints = 0;
 
-  selects.forEach(select => {
-    const grade = select.value;
-    const credits = parseFloat(select.dataset.credits);
-    const points = gradeMap[grade];
-
-    if (points > 0) {
-      totalCredits += credits;
-      totalPoints += points * credits;
-    }
+  subjectData[branch].forEach((subject, index) => {
+    const grade = parseInt(document.getElementById(`grade${index}`).value);
+    totalCredits += subject.credit;
+    totalPoints += grade * subject.credit;
   });
 
-  const cgpa = totalCredits > 0 ? (totalPoints / totalCredits).toFixed(2) : "0.00";
-  document.getElementById("result").innerText = `Your CGPA is: ${cgpa}`;
+  const cgpa = (totalPoints / totalCredits).toFixed(2);
+  resultBox.innerText = `Your CGPA for 4th Semester is: ${cgpa}`;
+  resultBox.style.display = "block";
 }
-

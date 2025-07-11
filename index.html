@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anna University CGPA Calculator - 4th Sem</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>CGPA Calculator - 4th Semester</h1>
+
+    <label for="branch">Select Branch:</label>
+    <select id="branch" onchange="loadSubjects()">
+      <option value="">--Choose--</option>
+      <option value="CSE">CSE</option>
+      <option value="ECE">ECE</option>
+      <option value="EEE">EEE</option>
+      <option value="MECH">MECH</option>
+      <option value="CIVIL">CIVIL</option>
+      <option value="AI&DS">AI&DS</option>
+      <option value="CSBS">CSBS</option>
+      <option value="IT">IT</option>
+    </select>
+
+    <form id="subject-form"></form>
+
+    <button onclick="calculateCGPA()">Calculate CGPA</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

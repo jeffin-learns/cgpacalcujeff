@@ -1,35 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="style.css" />
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Anna University CGPA Calculator - 4th Sem</title>
+  <title>CGPA Calculator – AU R2021</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <h1>CGPA Calculator - 4th Semester</h1>
+  <!-- 🔥 Background Video -->
+  <video autoplay muted loop id="bg-video">
+    <source src="https://cdn.pixabay.com/vimeo/331550839/gradient-20604.mp4?width=1280&hash=84f9dd074d43a89ee4e739cf8f5e7892b35a90aa" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 
-    <label for="branch">Select Branch:</label>
-    <select id="branch" onchange="loadSubjects()">
-      <option value="">--Choose--</option>
-      <option value="CSE">CSE</option>
-      <option value="ECE">ECE</option>
-      <option value="EEE">EEE</option>
-      <option value="MECH">MECH</option>
-      <option value="CIVIL">CIVIL</option>
-      <option value="AI&DS">AI&DS</option>
-      <option value="CSBS">CSBS</option>
-      <option value="IT">IT</option>
-    </select>
+  <!-- 🔲 Content Overlay -->
+  <div class="content">
+    <div class="container">
+      <h1>📚 Anna University CGPA Calculator – R2021</h1>
 
-    <form id="subject-form"></form>
+      <div class="form-group">
+        <label for="branch">🎓 Select Your Department:</label>
+        <select id="branch" onchange="loadSubjects()">
+          <option value="">-- Choose Branch --</option>
+          <option value="CSE">CSE</option>
+          <option value="IT">IT</option>
+          <option value="ECE">ECE</option>
+          <option value="EEE">EEE</option>
+          <option value="MECH">Mechanical</option>
+          <option value="CIVIL">Civil</option>
+          <option value="AI&DS">AI & DS</option>
+          <option value="CSBS">CSBS</option>
+        </select>
+      </div>
 
-    <button onclick="calculateCGPA()">Calculate CGPA</button>
+      <form id="subject-form"></form>
 
-    <div id="result"></div>
+      <button onclick="calculateCGPA()">🎯 Calculate CGPA</button>
+      <div id="result" class="result-box"></div>
+    </div>
   </div>
 
   <script src="script.js"></script>
